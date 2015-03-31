@@ -4,9 +4,8 @@
 
 .control, .match-log-box {
   min-height: 800px;
-  /*border: 1px solid lightgrey;*/
+  padding-top: 15px;
 }
-
 .match-log-box {
   background-color: red;
 }
@@ -25,5 +24,26 @@
   }
 }
 
+/*display bar CSS settings*/
 
+.display {
+  height: 400px;
+  background: url(../assets/basketball-court.png) no-repeat;
+  background-size: 100% auto;
+}
 
+.score > h3, .counter > h2 {
+  border: 1px solid white;
+  width: 50%;
+  margin-left: 25%;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/*match log settings*/
+
+.match-log {
+  background: #2f2d2d;
+  height: 770px;
+  color: #eee;
+  overflow-y: scroll;
+}
