@@ -1,0 +1,29 @@
+.main {
+  margin-top: 50px;
+}
+
+.control, .match-log-box {
+  min-height: 800px;
+  /*border: 1px solid lightgrey;*/
+}
+
+.match-log-box {
+  background-color: red;
+}
+.control {
+  background-color: blue;
+}
+
+@media (min-width: 991px) {
+  .control {
+    width: 595px;
+  }
+  .match-log-box {
+    width: auto;
+    margin-left: 595px;
+    position: absolute;
+  }
+}
+
+
+
