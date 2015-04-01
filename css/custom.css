@@ -29,7 +29,7 @@
 .display {
   height: 300px;
   background: url(../assets/basketball-court.png) no-repeat;
-  background-size: 100% auto;
+  background-size: cover;
 }
 
 .name > h3 {
@@ -82,7 +82,7 @@
   margin-top: 20px;
 }
 
-.team-foul > h4, .timeout > h4 {
+.timeout > h4 {
   margin-top: 0;
   margin-bottom: 0;
   border: 1px solid #2f2d2d;
@@ -91,7 +91,7 @@
   width: 70%;
   margin-left: 15%;
 }
-.timeout1 {
+./*timeout1 {
   padding-left: 0;
   padding-right: 30px;
 }
@@ -99,11 +99,41 @@
 .timeout2 {
   padding-right: 0;
   padding-left: 30px;
-}
+}*/
 .display-last {
   margin-top: 5px;
 }
-/*control buttons settings*/
+.team-foul > h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 1px solid #2f2d2d;
+  background: #2f2d2d;
+  color: #eee;
+  width: 40%;
+  margin-left: 30%;
+}
+@media (max-width: 615px) {
+   .display-bot strong, .display-last strong {
+    font-size: 12px;
+   }
+   .display-bot {
+    margin-top: 10px;
+   }
+   .display .col-xs-3 {
+    padding: 0 5px;
+   }
+   .display .col-xs-6, .display .col-xs-12, .display {
+    padding: 0;
+   }
+   .display h2 {
+    font-size: 25px;
+   }
+   #shot-clock {
+    font-size: 60px;
+   }
+}
+
+                /*control buttons settings*/
 .con-btns {
   margin-top: 15px;
   background: #2f2d2d;
@@ -115,7 +145,7 @@
 .con-btns, .scoring, .coach-left, .coach-right {
   padding: 3px;
 }
-.scoring .col-xs-2 {
+/*.scoring .col-xs-2 {
   width: 16%;
 }
 .scoring .col-xs-4 {
@@ -123,7 +153,7 @@
 }
 .scoring .col-xs-6 {
   width: 49%;
-}
+}*/
 @media (max-width: 473px) {
    .scoring .col-xs-6 {
     width: 45%;
@@ -139,7 +169,7 @@
   height: 40px;
 }
 .scoring .col-xs-6 {
-  margin: 0 1.5%;
+  /*margin: 0 1.5%;*/
 }
 
 .time-control {

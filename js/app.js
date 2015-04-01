@@ -9,7 +9,8 @@
     players: [],
     score: 0,
     teamFoul: 0,
-    timeout: 5
+    timeout: 5,
+    timeout20s: 1
   }
 
   var awayTeam = {
@@ -17,7 +18,8 @@
     players: [],
     score: 0,
     teamFoul: 0,
-    timeout: 5
+    timeout: 5,
+    timeout20s: 1
   }
 
   var minLeft = option.time;
@@ -150,13 +152,23 @@
   }
 
   var callTimeOut = function(team,time) {
-    if (team == 'home') {
-      homeTeam.timeout = homeTeam.timeout - 1;
-      $('#home-time-out').text(homeTeam.timeout);
-    } else if (team == 'away') {
-      awayTeam.timeout = awayTeam.timeout - 1;
-      $('#away-time-out').text(awayTeam.timeout);
-    }
+     if (time == 60) {
+      if (team == 'home') {
+        homeTeam.timeout = homeTeam.timeout - 1;
+        $('#home-time-out').text(homeTeam.timeout);
+      } else if (team == 'away') {
+        awayTeam.timeout = awayTeam.timeout - 1;
+        $('#away-time-out').text(awayTeam.timeout);
+      }
+     } else if (time == 20) {
+      if (team == 'home') {
+        homeTeam.timeout20s = homeTeam.timeout20s - 1;
+        $('#home-20-timeout').text(homeTeam.timeout20s);
+      } else if (team == 'away') {
+        awayTeam.timeout20s = awayTeam.timeout20s - 1;
+        $('#away-20-timeout').text(awayTeam.timeout20s);
+      }
+     } 
     pauseShotClock();
     pauseTimer();
     timeOutTimeLeft = time;
