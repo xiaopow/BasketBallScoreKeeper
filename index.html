@@ -32,24 +32,60 @@
           <div class="col-xs-12"><h4>1st Quater</h4></div>
           <div class="col-xs-12 display-top">
             <div class="col-xs-3 text-center name"><h3 id="home-name">HOME</h3></div>
-            <div class="col-xs-6 text-center counter"><h2><span id='minute'>12</span>:<span id='second'>00</span>.<span id="msecond">0</span></h2></div>
+            <div class="col-xs-6 text-center counter"><h2><span id='minute'>00</span>:<span id='second'>00</span>.<span id="msecond">0</span></h2></div>
             <div class="col-xs-3 text-center name"><h3 id="away-name">AWAY</h3></div>
           </div>
-          <div class="col-xs-12 dislplay-mid">
+          <div class="col-xs-12 display-mid">
             <div class="col-xs-3 text-center score"><h2 id="home-score">00</h3></div>
             <div class="col-xs-6 text-center shot-clock-box"><h1 id="shot-clock">00</h1></div>
             <div class="col-xs-3 text-center score"><h2 id="away-score">00</h3></div>
           </div>
+          <div class="col-xs-12 display-bot text-center">
+            <div class="col-xs-3"><strong>20s Timeout</strong></div>
+            <div class="col-xs-3 timeout1"><strong>60s Timeouts</strong></div>
+            <div class="col-xs-3 timeout2"><strong>60s Timeouts</strong></div>
+            <div class="col-xs-3"><strong>20s Timeout</strong></div>
+            <div class="col-xs-3 timeout"><h4 id="home-20-timeout">1</h4></div>
+            <div class="col-xs-3 timeout timeout1"><h4 id="home-time-out">6</h4></div>
+            <div class="col-xs-3 timeout timeout2"><h4 id="away-time-out">6</h4></div>
+            <div class="col-xs-3 timeout"><h4 id="away-20-timeout">1</h4></div>
+          </div>
+          <div class="col-xs-12 display-last text-center">
+            <div class="col-xs-6">Team Foul</div>
+            <div class="col-xs-6">Team Foul</div>
+            <div class="col-xs-6 team-foul"><h4 id="home-team-foul">0</h4></div>
+            <div class="col-xs-6 team-foul"><h4 id="away-team-foul">0</h4></div>
+          </div>
         </div>
         <div class="col-xs-12 con-btns">
-          <div class="col-xs-6 home">
-            
+          <div class="col-xs-12 text-center"><h4>Click to add points</h3></div>
+          <div class="col-xs-6 scoring scoring-left">
+            <div class="col-xs-12 text-center"><h4>Home</h4></div>
+            <button class="col-xs-4">3</button>
+            <button class="col-xs-6">2</button>
+            <button class="col-xs-2">1</button>
+            <button class="col-xs-12">-1 point</button>
+          </div>  
+          <div class="col-xs-6 scoring scoring-right">
+            <div class="col-xs-12 text-center"><h4>Away</h4></div>
+            <button class="col-xs-2">+1</button>
+            <button class="col-xs-6">+2</button>
+            <button class="col-xs-4">+3</button>
+            <button class="col-xs-12">-1 point</button>
           </div>
-          <div class="col-xs-6 away">
-            
+          <div class="col-xs-3 coach-left">
+            <button class="col-xs-12"><strong>60s</strong><br/>Time Out</button>
+            <button class="col-xs-12"><strong>20s</strong><br/>Time Out</button>
+            <button class="col-xs-12">Foul</button>
           </div>
-          <div class="col-xs-12 resume">
-            
+          <div class="col-xs-6 time-control">
+            <button class="col-xs-12">Start</button>
+            <button class="col-xs-12">Reset Shot Clock</button>
+          </div>
+          <div class="col-xs-3 coach-right">
+            <button class="col-xs-12"><strong>60s</strong><br/>Time Out</button>
+            <button class="col-xs-12"><strong>20s</strong><br/>Time Out</button>
+            <button class="col-xs-12">Foul</button>
           </div>
         </div>
       </div>

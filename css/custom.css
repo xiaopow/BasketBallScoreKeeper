@@ -27,7 +27,7 @@
 /*display bar CSS settings*/
 
 .display {
-  height: 400px;
+  height: 300px;
   background: url(../assets/basketball-court.png) no-repeat;
   background-size: 100% auto;
 }
@@ -35,11 +35,6 @@
 .name > h3 {
   margin-top: 0;
   margin-bottom: 19px;
-}
-
-.counter > h2 {
-  height: 45px;
-  padding-top: 5px;
 }
 
 .score > h2, .counter > h2 {
@@ -52,19 +47,24 @@
   background: #2f2d2d;
 }
 
+.counter > h2 {
+  height: 45px;
+  padding-top: 5px;
+}
+
 .score {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .score > h2 {
   height: 45px;
   padding-top: 5px;
-  width: 70%;
-  margin-left: 15%;
+  width: 80%;
+  margin-left: 10%;
 }
 
 .display-mid {
-  margin-top: 26px;
+  margin-top: 10px;
 }
 
 #shot-clock {
@@ -76,6 +76,74 @@
   color: red;
   margin-top: 0px;
   margin-bottom: 0;
+}
+
+.display-bot {
+  margin-top: 20px;
+}
+
+.team-foul > h4, .timeout > h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 1px solid #2f2d2d;
+  background: #2f2d2d;
+  color: #eee;
+  width: 70%;
+  margin-left: 15%;
+}
+.timeout1 {
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+.timeout2 {
+  padding-right: 0;
+  padding-left: 30px;
+}
+.display-last {
+  margin-top: 5px;
+}
+/*control buttons settings*/
+.con-btns {
+  margin-top: 15px;
+  background: #2f2d2d;
+}
+.con-btns h4 {
+  color: #eee;
+  margin: 0;
+}
+.con-btns, .scoring, .coach-left, .coach-right {
+  padding: 3px;
+}
+.scoring .col-xs-2 {
+  width: 16%;
+}
+.scoring .col-xs-4 {
+  width: 32%;
+}
+.scoring .col-xs-6 {
+  width: 49%;
+}
+@media (max-width: 473px) {
+   .scoring .col-xs-6 {
+    width: 45%;
+  } 
+}
+.scoring-left, .coach-left {
+  background: blue;
+}
+.scoring-right, .coach-right {
+  background: red;
+}
+.scoring button {
+  height: 40px;
+}
+.scoring .col-xs-6 {
+  margin: 0 1.5%;
+}
+
+.time-control {
+  padding: 5px;
 }
 
 /*match log settings*/
