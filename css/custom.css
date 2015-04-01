@@ -32,11 +32,50 @@
   background-size: 100% auto;
 }
 
-.score > h3, .counter > h2 {
-  border: 1px solid white;
+.name > h3 {
+  margin-top: 0;
+  margin-bottom: 19px;
+}
+
+.counter > h2 {
+  height: 45px;
+  padding-top: 5px;
+}
+
+.score > h2, .counter > h2 {
+  border: 2px solid red;
+  color: #eee;
   width: 50%;
   margin-left: 25%;
-  background: rgba(255, 255, 255, 0.7);
+  margin-top: 0px;
+  margin-bottom: 0;
+  background: #2f2d2d;
+}
+
+.score {
+  margin-top: 40px;
+}
+
+.score > h2 {
+  height: 45px;
+  padding-top: 5px;
+  width: 70%;
+  margin-left: 15%;
+}
+
+.shot-clock-box {
+  margin-top: 26px;
+}
+
+#shot-clock {
+  font-size: 70px;
+  width: 50%;
+  margin-left: 25%;
+  border: 2px solid red;
+  background: #2f2d2d;
+  color: red;
+  margin-top: 0px;
+  margin-bottom: 0;
 }
 
 /*match log settings*/
