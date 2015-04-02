@@ -28,6 +28,9 @@
   <div class="container-fluid main">
     <div class="row">
       <div class="col-xs-12 col-md-5 control">
+        <div class="col-xs-12 set-up">
+          <div class="">
+        </div>
         <div class="col-xs-12 display">
           <div class="col-xs-12"><h4>1st Quater</h4></div>
           <div class="col-xs-12 display-top">
@@ -73,29 +76,29 @@
             <button class="col-xs-4" id="away-3">+3</button>
             <button class="col-xs-12" id="away-n1">-1 point</button>
           </div>
-          <div class="col-xs-12 roster home-roster-score">
-            <button class="col-xs-3 home-player-point">Player 1</button>
-            <button class="col-xs-3 home-player-point">Player 2</button>
-            <button class="col-xs-3 home-player-point">Player 3</button>
-            <button class="col-xs-3 home-player-point">Player 4</button>
+          <div class="col-xs-12 roster hide home-roster-score">
+            <button class="col-xs-3 home-player-point">1</button>
+            <button class="col-xs-3 home-player-point">2</button>
+            <button class="col-xs-3 home-player-point">3</button>
+            <button class="col-xs-3 home-player-point">4</button>
           </div>
-          <div class="col-xs-12 roster away-roster-score">
-            <button class="col-xs-3 away-player-point">Player 1</button>
-            <button class="col-xs-3 away-player-point">Player 2</button>
-            <button class="col-xs-3 away-player-point">Player 3</button>
-            <button class="col-xs-3 away-player-point">Player 4</button>
+          <div class="col-xs-12 roster hide away-roster-score">
+            <button class="col-xs-3 away-player-point">1</button>
+            <button class="col-xs-3 away-player-point">2</button>
+            <button class="col-xs-3 away-player-point">3</button>
+            <button class="col-xs-3 away-player-point">4</button>
           </div>
-          <div class="col-xs-12 roster home-roster-foul">
-            <button class="col-xs-3 home-player-foul">Player 1</button>
-            <button class="col-xs-3 home-player-foul">Player 2</button>
-            <button class="col-xs-3 home-player-foul">Player 3</button>
-            <button class="col-xs-3 home-player-foul">Player 4</button>
+          <div class="col-xs-12 roster hide home-roster-foul">
+            <button class="col-xs-3 home-player-foul">1</button>
+            <button class="col-xs-3 home-player-foul">2</button>
+            <button class="col-xs-3 home-player-foul">3</button>
+            <button class="col-xs-3 home-player-foul">4</button>
           </div>
-          <div class="col-xs-12 roster away-roster-foul">
-            <button class="col-xs-3 away-player-foul">Player 1</button>
-            <button class="col-xs-3 away-player-foul">Player 2</button>
-            <button class="col-xs-3 away-player-foul">Player 3</button>
-            <button class="col-xs-3 away-player-foul">Player 4</button>
+          <div class="col-xs-12 roster hide away-roster-foul">
+            <button class="col-xs-3 away-player-foul">1</button>
+            <button class="col-xs-3 away-player-foul">2</button>
+            <button class="col-xs-3 away-player-foul">3</button>
+            <button class="col-xs-3 away-player-foul">4</button>
           </div>
           <div class="col-xs-3 coach-left">
             <button class="col-xs-12" id="home-60s"><strong>60s</strong><br/>Time Out</button>
@@ -104,15 +107,15 @@
           </div>
           <div class="col-xs-6 time-control">
             <div class="col-xs-12 timer-header text-center">Timer</div>
-            <div class="col-xs-5 timer-header text-center">Min</div>
-            <div class="col-xs-4 timer-header text-center">Sec</div>
-            <div class="col-xs-3 timer-header text-center"><small>1/10 s</small></div>
-            <button class="col-xs-5" id="min-1">+1</button>
-            <button class="col-xs-4" id="sec-1">+1</button>
-            <button class="col-xs-3" id="ms-1">+1</button>
-            <button class="col-xs-5" id="min-n1">-1</button>
-            <button class="col-xs-4" id="sec-n1">-1</button>
-            <button class="col-xs-3" id="ms-n1">-1</button>
+            <div class="col-xs-4 col-sm-5 timer-header text-center">Min</div>
+            <div class="col-xs-4 col-sm-4 timer-header text-center">Sec</div>
+            <div class="col-xs-4 col-sm-3 timer-header text-center">1/10s</div>
+            <button class="col-xs-4 col-sm-5" id="min-1">+1</button>
+            <button class="col-xs-4 col-sm-4" id="sec-1">+1</button>
+            <button class="col-xs-4 col-sm-3" id="ms-1">+1</button>
+            <button class="col-xs-4 col-sm-5" id="min-n1">-1</button>
+            <button class="col-xs-4 col-sm-4" id="sec-n1">-1</button>
+            <button class="col-xs-4 col-sm-3" id="ms-n1">-1</button>
             <button class="col-xs-12 timer-button" id="start">Start</button>
             <button class="col-xs-12 timer-button hide" id="pause">Pause</button>
             <button class="col-xs-12 timer-button hide" id="resume">Resume</button>
@@ -127,16 +130,18 @@
             <button class="col-xs-12" id="away-foul">Foul</button>
           </div>
         </div>
+        <div class="col-xs-12 input-box">
+          <div class="input-group">
+            <input class="form-control" id="user-input" placeholder="enter custom log here...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" id="enter">enter</button>
+            </span>
+          </div>
+        </div>
       </div>
       <div class="col-xs-12 col-md-7 match-log-box">
         <div class="col-xs-12 match-log">
-          <h1>Hello</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <p>===Thank you for using the Basketball Game Score Keeper, you will begin by customising your game. Fill out the team information press start===</p>
         </div>
       </div>
     </div>

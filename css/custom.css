@@ -134,6 +134,7 @@
 }
 
                 /*control buttons settings*/
+
 .con-btns {
   margin-top: 15px;
   background: #2f2d2d;
@@ -189,6 +190,13 @@
   color: #eee;
 }
 
+/*input box settings*/
+
+.input-box {
+  padding: 10px 3px;
+  background: #2f2d2d;
+}
+
 /*match log settings*/
 
 .match-log {
@@ -197,3 +205,7 @@
   color: #eee;
   overflow-y: scroll;
 }
+.match-log p {
+  margin-bottom: 2px;
+}
+
