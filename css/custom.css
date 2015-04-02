@@ -175,6 +175,9 @@
 .time-control {
   padding: 5px;
 }
+.timer-header {
+  color: #eee;
+}
 
 /*match log settings*/
 

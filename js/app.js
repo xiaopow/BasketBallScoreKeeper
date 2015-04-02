@@ -6,7 +6,7 @@
 
   var homeTeam = {
     name: 'Home',
-    players: [],
+    players: {},
     score: 0,
     teamFoul: 0,
     timeout: 5,
@@ -15,7 +15,7 @@
 
   var awayTeam = {
     name: 'Home',
-    players: [],
+    players: {},
     score: 0,
     teamFoul: 0,
     timeout: 5,
@@ -26,12 +26,20 @@
   var secLeft = 0;
   var msecLeft = 0;
   var timer;
-  var shotSecLeft = 24;
+  var shotSecLeft = 23;
   var shotTimer;
   var timeOutTimeLeft = 0;
   var timeOutTimer;
 
   //---------------------------- Timer System ----------------------------
+
+  var secPresenter = function() {
+    if (secLeft > 9) {
+        $('#second').text(secLeft);
+      } else {
+        $('#second').text('0' + secLeft);
+      }
+  }
 
   var countDown = function () {
     if (minLeft > 0 && secLeft === 0 && msecLeft === 0) {
@@ -50,11 +58,7 @@
       secLeft = secLeft - 1;
       msecLeft = 9;
     } else if (minLeft >= 0 && msecLeft > 0) {
-      if (secLeft > 9) {
-        $('#second').text(secLeft);
-      } else {
-        $('#second').text('0' + secLeft);
-      }
+      secPresenter();
       $('#msecond').text(msecLeft);
       msecLeft = msecLeft - 1 ;
     } else if (minLeft === 0 && secLeft === 0 && msecLeft === 0) {
@@ -72,22 +76,64 @@
     clearInterval(timer);
   };
 
+  var adjustTimer = function(element,amount) {
+    if (element === 'min') {
+      if ((minLeft + amount) < 0) {
+        // do nothing
+      } else {
+        minLeft = minLeft + amount;
+        $('#minute').text(minLeft);
+      }
+    } else if (element === 'sec') {
+      if (secLeft + amount > 60) {
+        secLeft = (secLeft + amount) % 60;
+      } else if (secLeft + amount < 0) {
+        secLeft = 61 + ((secLeft + amount) % 60);
+      } else {
+        secLeft = secLeft + amount;
+      } secPresenter();
+    } else if (element === 'ms') {
+      if (msecLeft + amount > 9) {
+        msecLeft = (msecLeft + amount) % 10;
+      } else if (msecLeft + amount < 0) {
+        msecLeft = 10 +((msecLeft + amount) % 10);
+      } else {
+        msecLeft = msecLeft + amount;
+      }
+      $('#msecond').text(msecLeft);
+    }
+  };
+
   //-------------------------- Shot Clock System ---------------------------
+
+  var shotClockPresenter = function() {
+    if (shotSecLeft > 9) {
+        $('#shot-clock').text(shotSecLeft);
+      } else {
+        $('#shot-clock').text('0' + shotSecLeft);
+      }
+    };
 
   var shotClock = function () {
     if (shotSecLeft === 0) {
       $('#shot-clock').text('00');
       shotSecLeft = 24;
     } else if (shotSecLeft > 0) {
-      if (shotSecLeft > 9) {
-        $('#shot-clock').text(shotSecLeft);
-        shotSecLeft = shotSecLeft - 1;
-      } else {
-        $('#shot-clock').text('0' + shotSecLeft);
-        shotSecLeft = shotSecLeft - 1;
-      }
+      shotClockPresenter();
+      shotSecLeft = shotSecLeft - 1;
     }
   };
+
+  var adjustShotClock = function(amount) {
+      if (shotSecLeft + amount > 24) {
+        shotSecLeft = (shotSecLeft + amount) % 25;
+      } else if (shotSecLeft + amount < 0) {
+        shotSecLeft = 25 +((shotSecLeft + amount) % 25);
+      } else {
+        shotSecLeft = shotSecLeft + amount;
+      }
+      shotClockPresenter();
+    };
 
   var resumeShotClock = function() {
     shotTimer = setInterval(shotClock, 1000);
@@ -176,7 +222,15 @@
   };
   //--------------------------- Team Foul System ----------------------------
 
-
+  var foul = function(team) {
+    if (team === "home") {
+      homeTeam.teamFoul = homeTeam.teamFoul + 1;
+      $('#home-team-foul').text(homeTeam.teamFoul);
+    } else if (team === "away") {
+      awayTeam.teamFoul = awayTeam.teamFoul + 1;
+      $('#away-team-foul').text(awayTeam.teamFoul);
+    }
+  };
   //--------------------------- Overall Controls ----------------------------
 
   var resumeAll = function() {
@@ -189,4 +243,113 @@
     pauseShotClock();
   };
   
+  //--------------------------- Control Buttons ------------------------------
+
+  // scoring system
+  $(document).on('click', '#home-3', function(){
+    addScore('home',3);
+  });
+  $(document).on('click', '#home-2', function(){
+    addScore('home',2);
+  });
+  $(document).on('click', '#home-1', function(){
+    addScore('home',1);
+  });
+  $(document).on('click', '#home-n1', function(){
+    if (homeTeam.score > 0) {
+      addScore('home',-1);
+    }
+  });
+
+  $(document).on('click', '#away-3', function(){
+    addScore('away',3);
+  });
+  $(document).on('click', '#away-2', function(){
+    addScore('away',2);
+  });
+  $(document).on('click', '#away-1', function(){
+    addScore('away',1);
+  });
+  $(document).on('click', '#away-n1', function(){
+    if (awayTeam.score > 0) {
+      addScore('away',-1);
+    }
+  });
+
+  // time out system
+  $(document).on('click', '#home-60s', function(){
+    if (homeTeam.timeout > 0) {
+      callTimeOut('home',60);
+    }
+  });
+  $(document).on('click', '#home-20s', function(){
+    if (homeTeam.timeout20s > 0) {
+      callTimeOut('home',20);
+    }
+  });
+  $(document).on('click', '#away-60s', function(){
+    if (awayTeam.timeout > 0) {
+      callTimeOut('away',60);
+    }
+  });
+  $(document).on('click', '#away-20s', function(){
+    if (awayTeam.timeout20s > 0) {
+      callTimeOut('away',20);
+    }
+  });
+
+  // foul system
+  $(document).on('click', '#home-foul', function(){
+    foul('home');
+  });
+  $(document).on('click', '#away-foul', function(){
+    foul('away');
+  });
+
+  // timer system
+  $(document).on('click', '#min-1', function(){
+    adjustTimer('min',1)
+  });
+  $(document).on('click', '#min-n1', function(){
+    adjustTimer('min',-1)
+  });
+
+  $(document).on('click', '#sec-1', function(){
+    adjustTimer('sec',1)
+  });
+  $(document).on('click', '#sec-n1', function(){
+    adjustTimer('sec',-1)
+  });
+
+  $(document).on('click', '#ms-1', function(){
+    adjustTimer('ms',1)
+  });
+  $(document).on('click', '#ms-n1', function(){
+    adjustTimer('ms',-1)
+  });
+
+  $(document).on('click', '#start', function(){
+    resumeAll();
+  });
+  $(document).on('click', '#pause', function(){
+    pauseAll();
+  });
+  $(document).on('click', '#resume', function(){
+    resumeAll();
+  });
+
+  $(document).on('click', '#reset-shot', function(){
+    resetShotClock();
+  })
+  $(document).on('click', '#reset-shot-time', function(){
+    resetShotClockLeft();
+  })
+  $(document).on('click', '#shotclock-1', function(){
+    adjustShotClock(1);
+  })
+  $(document).on('click', '#shotclock-n1', function(){
+    adjustShotClock(-1);
+  })
+
+
 // })

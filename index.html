@@ -68,9 +68,9 @@
           </div>  
           <div class="col-xs-6 scoring scoring-right">
             <div class="col-xs-12 text-center"><h4>Away</h4></div>
-            <button class="col-xs-2" id="away-3">+1</button>
+            <button class="col-xs-2" id="away-1">+1</button>
             <button class="col-xs-6" id="away-2">+2</button>
-            <button class="col-xs-4" id="away-1">+3</button>
+            <button class="col-xs-4" id="away-3">+3</button>
             <button class="col-xs-12" id="away-n1">-1 point</button>
           </div>
           <div class="col-xs-3 coach-left">
@@ -79,13 +79,28 @@
             <button class="col-xs-12" id="home-foul">Foul</button>
           </div>
           <div class="col-xs-6 time-control">
-            <button class="col-xs-12">Start</button>
-            <button class="col-xs-12">Reset Shot Clock</button>
+            <div class="col-xs-12 timer-header text-center">Timer</div>
+            <div class="col-xs-5 timer-header text-center">Min</div>
+            <div class="col-xs-4 timer-header text-center">Sec</div>
+            <div class="col-xs-3 timer-header text-center"><small>1/10 s</small></div>
+            <button class="col-xs-5" id="min-1">+1</button>
+            <button class="col-xs-4" id="sec-1">+1</button>
+            <button class="col-xs-3" id="ms-1">+1</button>
+            <button class="col-xs-5" id="min-n1">-1</button>
+            <button class="col-xs-4" id="sec-n1">-1</button>
+            <button class="col-xs-3" id="ms-n1">-1</button>
+            <button class="col-xs-12" id="start">Start</button>
+            <button class="col-xs-12" id="pause">Pause</button>
+            <button class="col-xs-12" id="resume">Resume</button>
+            <button class="col-xs-12" id="reset-shot">Reset Shot Clock</button>
+            <button class="col-xs-12" id="reset-shot-time">Reset Shot Clock</button>
+            <button class="col-xs-6" id="shotclock-1">+1s</button>
+            <button class="col-xs-6" id="shotclock-n1">-1s</button>
           </div>
           <div class="col-xs-3 coach-right">
-            <button class="col-xs-12"><strong>60s</strong><br/>Time Out</button>
-            <button class="col-xs-12"><strong>20s</strong><br/>Time Out</button>
-            <button class="col-xs-12">Foul</button>
+            <button class="col-xs-12" id="away-60s"><strong>60s</strong><br/>Time Out</button>
+            <button class="col-xs-12" id="away-20s"><strong>20s</strong><br/>Time Out</button>
+            <button class="col-xs-12" id="away-foul">Foul</button>
           </div>
         </div>
       </div>
