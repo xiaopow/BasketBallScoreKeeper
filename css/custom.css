@@ -172,6 +172,16 @@
   /*margin: 0 1.5%;*/
 }
 
+.roster {
+  padding: 3px;
+}
+.home-roster-score, .home-roster-foul {
+  background: blue;
+}
+.away-roster-score, .away-roster-foul {
+  background: red;
+}
+
 .time-control {
   padding: 5px;
 }
