@@ -24,6 +24,11 @@
   }
 }
 
+/*set up form settings*/
+
+.set-up {
+  padding: 0;
+}
 /*display bar CSS settings*/
 
 .display {
@@ -155,11 +160,11 @@
 .scoring .col-xs-6 {
   width: 49%;
 }*/
-@media (max-width: 473px) {
+/*@media (max-width: 473px) {
    .scoring .col-xs-6 {
     width: 45%;
   } 
-}
+}*/
 .scoring-left, .coach-left {
   background: blue;
 }

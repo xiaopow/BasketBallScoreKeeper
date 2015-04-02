@@ -28,8 +28,95 @@
   <div class="container-fluid main">
     <div class="row">
       <div class="col-xs-12 col-md-5 control">
-        <div class="col-xs-12 set-up">
-          <div class="">
+
+        <div class="col-xs-12 set-up hide">
+          <h2 class="text-center">Set Up</h2>
+          <form class="form-inline">
+            <div class="form-group col-xs-6">
+              <div class="input-group">
+                <div class="input-group-addon">Sessions</div>
+                <input type="number" class="form-control" id="set-sessions" placeholder="4 for 4 quarters">
+              </div>
+            </div>
+            <div class="form-group col-xs-6">
+              <div class="input-group">
+                <div class="input-group-addon">Time/round</div>
+                <input type="number" class="form-control" id="set-time" placeholder="10">
+                <div class="input-group-addon">min</div>
+              </div>
+            </div>
+          </form>
+
+          <div class="col-xs-6 set-home-team">
+            <h3 class="text-center">Home Team</h3>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">Name</div>
+                <input type="text" class="form-control" id="set-home-name" placeholder="Lakers">
+              </div>
+            </div>
+            <h4>Roster</h4>
+            <div>
+              <div class="set-home-player">
+                <input type="text" class="col-xs-3 home-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 home-player-name" placeholder="Name">
+              </div>
+              <div class="set-home-player">
+                <input type="text" class="col-xs-3 home-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 home-player-name" placeholder="Name">
+              </div>
+              <div class="set-home-player">
+                <input type="text" class="col-xs-3 home-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 home-player-name" placeholder="Name">
+              </div>
+              <div class="set-home-player">
+                <input type="text" class="col-xs-3 home-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 home-player-name" placeholder="Name">
+              </div>
+              <div class="set-home-player">
+                <input type="text" class="col-xs-3 home-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 home-player-name" placeholder="Name">
+              </div>
+              <button class="add-player col-xs-offset-1 col-xs-10" id="add-home-player">Add More Players</button>
+            </div>
+          </div>
+
+          <div class="col-xs-6 set-away-team">
+            <h3 class="text-center">Away Team</h3>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">Name</div>
+                <input type="text" class="form-control" id="set-away-name" placeholder="Celtics">
+              </div>
+            </div>
+            <h4>Roster</h4>
+            <div>
+              <div class="set-away-player">
+                <input type="text" class="col-xs-3 away-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 away-player-name" placeholder="Name">
+              </div>
+              <div class="set-away-player">
+                <input type="text" class="col-xs-3 away-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 away-player-name" placeholder="Name">
+              </div>
+              <div class="set-away-player">
+                <input type="text" class="col-xs-3 away-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 away-player-name" placeholder="Name">
+              </div>
+              <div class="set-away-player">
+                <input type="text" class="col-xs-3 away-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 away-player-name" placeholder="Name">
+              </div>
+              <div class="set-away-player">
+                <input type="text" class="col-xs-3 away-player-no" placeholder="No">
+                <input type="text" class="col-xs-9 away-player-name" placeholder="Name">
+              </div>
+              <button class="add-player col-xs-offset-1 col-xs-10" id="add-away-player">Add More Players</button>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-default col-xs-4 col-xs-offset-4">Begin Match</button>
+          </div>
         </div>
         <div class="col-xs-12 display">
           <div class="col-xs-12"><h4>1st Quater</h4></div>
@@ -64,70 +151,70 @@
           <div class="col-xs-12 text-center"><h4>Click to add points</h3></div>
           <div class="col-xs-6 scoring scoring-left">
             <div class="col-xs-12 text-center"><h4>Home</h4></div>
-            <button class="col-xs-4" id="home-3">+3</button>
-            <button class="col-xs-6" id="home-2">+2</button>
-            <button class="col-xs-2" id="home-1">+1</button>
-            <button class="col-xs-12" id="home-n1">-1 point</button>
+            <button class="btn btn-default col-xs-4" id="home-3">+3</button>
+            <button class="btn btn-default col-xs-6" id="home-2">+2</button>
+            <button class="btn btn-default col-xs-2" id="home-1">+1</button>
+            <button class="btn btn-default col-xs-12" id="home-n1">-1 point</button>
           </div>  
           <div class="col-xs-6 scoring scoring-right">
             <div class="col-xs-12 text-center"><h4>Away</h4></div>
-            <button class="col-xs-2" id="away-1">+1</button>
-            <button class="col-xs-6" id="away-2">+2</button>
-            <button class="col-xs-4" id="away-3">+3</button>
-            <button class="col-xs-12" id="away-n1">-1 point</button>
+            <button class="btn btn-default col-xs-2" id="away-1">+1</button>
+            <button class="btn btn-default col-xs-6" id="away-2">+2</button>
+            <button class="btn btn-default col-xs-4" id="away-3">+3</button>
+            <button class="btn btn-default col-xs-12" id="away-n1">-1 point</button>
           </div>
           <div class="col-xs-12 roster hide home-roster-score">
-            <button class="col-xs-3 home-player-point">1</button>
-            <button class="col-xs-3 home-player-point">2</button>
-            <button class="col-xs-3 home-player-point">3</button>
-            <button class="col-xs-3 home-player-point">4</button>
+            <button class="btn btn-default col-xs-3 home-player-point">1</button>
+            <button class="btn btn-default col-xs-3 home-player-point">2</button>
+            <button class="btn btn-default col-xs-3 home-player-point">3</button>
+            <button class="btn btn-default col-xs-3 home-player-point">4</button>
           </div>
           <div class="col-xs-12 roster hide away-roster-score">
-            <button class="col-xs-3 away-player-point">1</button>
-            <button class="col-xs-3 away-player-point">2</button>
-            <button class="col-xs-3 away-player-point">3</button>
-            <button class="col-xs-3 away-player-point">4</button>
+            <button class="btn btn-default col-xs-3 away-player-point">1</button>
+            <button class="btn btn-default col-xs-3 away-player-point">2</button>
+            <button class="btn btn-default col-xs-3 away-player-point">3</button>
+            <button class="btn btn-default col-xs-3 away-player-point">4</button>
           </div>
           <div class="col-xs-12 roster hide home-roster-foul">
-            <button class="col-xs-3 home-player-foul">1</button>
-            <button class="col-xs-3 home-player-foul">2</button>
-            <button class="col-xs-3 home-player-foul">3</button>
-            <button class="col-xs-3 home-player-foul">4</button>
+            <button class="btn btn-default col-xs-3 home-player-foul">1</button>
+            <button class="btn btn-default col-xs-3 home-player-foul">2</button>
+            <button class="btn btn-default col-xs-3 home-player-foul">3</button>
+            <button class="btn btn-default col-xs-3 home-player-foul">4</button>
           </div>
           <div class="col-xs-12 roster hide away-roster-foul">
-            <button class="col-xs-3 away-player-foul">1</button>
-            <button class="col-xs-3 away-player-foul">2</button>
-            <button class="col-xs-3 away-player-foul">3</button>
-            <button class="col-xs-3 away-player-foul">4</button>
+            <button class="btn btn-default col-xs-3 away-player-foul">1</button>
+            <button class="btn btn-default col-xs-3 away-player-foul">2</button>
+            <button class="btn btn-default col-xs-3 away-player-foul">3</button>
+            <button class="btn btn-default col-xs-3 away-player-foul">4</button>
           </div>
           <div class="col-xs-3 coach-left">
-            <button class="col-xs-12" id="home-60s"><strong>60s</strong><br/>Time Out</button>
-            <button class="col-xs-12" id="home-20s"><strong>20s</strong><br/>Time Out</button>
-            <button class="col-xs-12" id="home-foul">Foul</button>
+            <button class="btn btn-default col-xs-12" id="home-60s"><strong>60s</strong><br/>Time Out</button>
+            <button class="btn btn-default col-xs-12" id="home-20s"><strong>20s</strong><br/>Time Out</button>
+            <button class="btn btn-default col-xs-12" id="home-foul">Foul</button>
           </div>
           <div class="col-xs-6 time-control">
             <div class="col-xs-12 timer-header text-center">Timer</div>
             <div class="col-xs-4 col-sm-5 timer-header text-center">Min</div>
             <div class="col-xs-4 col-sm-4 timer-header text-center">Sec</div>
             <div class="col-xs-4 col-sm-3 timer-header text-center">1/10s</div>
-            <button class="col-xs-4 col-sm-5" id="min-1">+1</button>
-            <button class="col-xs-4 col-sm-4" id="sec-1">+1</button>
-            <button class="col-xs-4 col-sm-3" id="ms-1">+1</button>
-            <button class="col-xs-4 col-sm-5" id="min-n1">-1</button>
-            <button class="col-xs-4 col-sm-4" id="sec-n1">-1</button>
-            <button class="col-xs-4 col-sm-3" id="ms-n1">-1</button>
-            <button class="col-xs-12 timer-button" id="start">Start</button>
-            <button class="col-xs-12 timer-button hide" id="pause">Pause</button>
-            <button class="col-xs-12 timer-button hide" id="resume">Resume</button>
-            <button class="col-xs-12 hide" id="reset-shot">Reset Shot Clock</button>
-            <button class="col-xs-12" id="reset-shot-time">Reset Shot Clock Time</button>
-            <button class="col-xs-6" id="shotclock-1">+1s</button>
-            <button class="col-xs-6" id="shotclock-n1">-1s</button>
+            <button class="btn btn-default col-xs-4 col-sm-5" id="min-1">+1</button>
+            <button class="btn btn-default col-xs-4 col-sm-4" id="sec-1">+1</button>
+            <button class="btn btn-default col-xs-4 col-sm-3" id="ms-1">+1</button>
+            <button class="btn btn-default col-xs-4 col-sm-5" id="min-n1">-1</button>
+            <button class="btn btn-default col-xs-4 col-sm-4" id="sec-n1">-1</button>
+            <button class="btn btn-default col-xs-4 col-sm-3" id="ms-n1">-1</button>
+            <button class="btn btn-default col-xs-12 timer-button" id="start">Start</button>
+            <button class="btn btn-default col-xs-12 timer-button hide" id="pause">Pause</button>
+            <button class="btn btn-default col-xs-12 timer-button hide" id="resume">Resume</button>
+            <button class="btn btn-default col-xs-12 hide" id="reset-shot">Reset Shot Clock</button>
+            <button class="btn btn-default col-xs-12" id="reset-shot-time">Reset Shot Clock Time</button>
+            <button class="btn btn-default col-xs-6" id="shotclock-1">+1s</button>
+            <button class="btn btn-default col-xs-6" id="shotclock-n1">-1s</button>
           </div>
           <div class="col-xs-3 coach-right">
-            <button class="col-xs-12" id="away-60s"><strong>60s</strong><br/>Time Out</button>
-            <button class="col-xs-12" id="away-20s"><strong>20s</strong><br/>Time Out</button>
-            <button class="col-xs-12" id="away-foul">Foul</button>
+            <button class="btn btn-default col-xs-12" id="away-60s"><strong>60s</strong><br/>Time Out</button>
+            <button class="btn btn-default col-xs-12" id="away-20s"><strong>20s</strong><br/>Time Out</button>
+            <button class="btn btn-default col-xs-12" id="away-foul">Foul</button>
           </div>
         </div>
         <div class="col-xs-12 input-box">

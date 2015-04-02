@@ -6,8 +6,8 @@
 
   var homeTeam = {
     name: 'homer',
-    addPlayer: function(number) {
-      this.roster[number] = {name: '', score: 0, foul: 0}
+    addPlayer: function(number,playerName) {
+      this.roster[number] = {name: playerName, score: 0, foul: 0}
     },
     roster: {
       "1": {name: 'Player 1', score: 0, foul: 0},
@@ -23,8 +23,8 @@
 
   var awayTeam = {
     name: 'flyaway',
-    addPlayer: function(number) {
-      this.roster[number] = {name: '', score: 0, foul: 0}
+     addPlayer: function(number,playerName) {
+      this.roster[number] = {name: playerName, score: 0, foul: 0}
     },
     roster: {
       "1": {name: 'Player 1', score: 0, foul: 0},
@@ -223,18 +223,22 @@
       if (team === 'home') {
         homeTeam.timeout = homeTeam.timeout - 1;
         $('#home-time-out').text(homeTeam.timeout);
+        printWithTime('Team ' + homeTeam.name + ' calls a 60s timeout.');
       } else if (team === 'away') {
         awayTeam.timeout = awayTeam.timeout - 1;
         $('#away-time-out').text(awayTeam.timeout);
-      } printWithTime('Team ' + homeTeam.name + ' calls a 60s timeout.');
+        printWithTime('Team ' + awayTeam.name + ' calls a 60s timeout.');
+      } 
      } else if (time === 20) {
       if (team === 'home') {
         homeTeam.timeout20s = homeTeam.timeout20s - 1;
         $('#home-20-timeout').text(homeTeam.timeout20s);
+        printWithTime('Team ' + homeTeam.name + ' calls a 20s timeout.');
       } else if (team === 'away') {
         awayTeam.timeout20s = awayTeam.timeout20s - 1;
         $('#away-20-timeout').text(awayTeam.timeout20s);
-      } printWithTime('Team ' + awayTeam.name + ' calls a 20s timeout.');
+        printWithTime('Team ' + awayTeam.name + ' calls a 20s timeout.');
+      } 
      } 
     pauseShotClock();
     pauseTimer();
@@ -255,7 +259,7 @@
       $('#away-team-foul').text(awayTeam.teamFoul);
       awayTeam['roster'][playerNum]['foul'] = awayTeam['roster'][playerNum]['foul'] + 1;
       printWithTime('Team ' + awayTeam.name + ', player ' + awayTeam['roster'][playerNum]['name'] + ' commits a personal foul. '
-        + awayTeam['roster'][playerNum]['name'] + ' has committed' + awayTeam['roster'][playerNum]['foul'] + ' personal fouls.');
+        + awayTeam['roster'][playerNum]['name'] + ' has committed ' + awayTeam['roster'][playerNum]['foul'] + ' personal fouls.');
     }
   };
 
@@ -477,5 +481,18 @@
 
 //--------------------------- Set Up Game ------------------------------
 
+  $(document).on('click', '#add-home-player', function() {
+    $(this).parent().prepend('<div class="set-home-player"> \
+                <input type="text" class="col-xs-3 home-player-no" placeholder="No"> \
+                <input type="text" class="col-xs-9 home-player-name" placeholder="Name"> \
+              </div>')
+  });
+
+  $(document).on('click', '#add-away-player', function() {
+    $(this).parent().prepend('<div class="set-away-player"> \
+                <input type="text" class="col-xs-3 away-player-no" placeholder="No"> \
+                <input type="text" class="col-xs-9 away-player-name" placeholder="Name"> \
+              </div>')
+  });
 
 // })
