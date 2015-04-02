@@ -2,7 +2,7 @@
   var option = {
     time: 12,
     sessions: 4,
-  }
+  };
 
   var homeTeam = {
     name: 'Home',
@@ -11,7 +11,7 @@
     teamFoul: 0,
     timeout: 5,
     timeout20s: 1
-  }
+  };
 
   var awayTeam = {
     name: 'Home',
@@ -20,7 +20,7 @@
     teamFoul: 0,
     timeout: 5,
     timeout20s: 1
-  }
+  };
 
   var minLeft = option.time;
   var secLeft = 0;
@@ -34,18 +34,18 @@
   //---------------------------- Timer System ----------------------------
 
   var countDown = function () {
-    if (minLeft > 0 && secLeft == 0 && msecLeft == 0) {
+    if (minLeft > 0 && secLeft === 0 && msecLeft === 0) {
       $('#second').text('00');
       $('#msecond').text(msecLeft);
       msecLeft = 9;
       minLeft = minLeft - 1;
       secLeft = 59;
-    } else if (secLeft == 59 && msecLeft == 9) {
+    } else if (secLeft === 59 && msecLeft === 9) {
       $('#minute').text(minLeft);
       $('#second').text(secLeft);
       $('#msecond').text(msecLeft);
       msecLeft = msecLeft - 1 ;
-    } else if (minLeft >= 0 && secLeft > 0 && msecLeft == 0) {
+    } else if (minLeft >= 0 && secLeft > 0 && msecLeft === 0) {
       $('#msecond').text(msecLeft);
       secLeft = secLeft - 1;
       msecLeft = 9;
@@ -57,26 +57,26 @@
       }
       $('#msecond').text(msecLeft);
       msecLeft = msecLeft - 1 ;
-    } else if (minLeft == 0 && secLeft == 0 && msecLeft == 0) {
+    } else if (minLeft === 0 && secLeft === 0 && msecLeft === 0) {
       $('#msecond').text(msecLeft);
       console.log('stop the timer');
       clearInterval(timer);
     }
-  }
+  };
 
   var resumeTimer = function() {
     timer = setInterval(countDown, 100);
-  }
+  };
 
   var pauseTimer = function() {
     clearInterval(timer);
-  }
+  };
 
   //-------------------------- Shot Clock System ---------------------------
 
   var shotClock = function () {
-    if (shotSecLeft == 0) {
-      $('#shot-clock').text('00')
+    if (shotSecLeft === 0) {
+      $('#shot-clock').text('00');
       shotSecLeft = 24;
     } else if (shotSecLeft > 0) {
       if (shotSecLeft > 9) {
@@ -87,38 +87,38 @@
         shotSecLeft = shotSecLeft - 1;
       }
     }
-  }
+  };
 
   var resumeShotClock = function() {
     shotTimer = setInterval(shotClock, 1000);
-  }
+  };
 
   var pauseShotClock = function() {
     clearInterval(shotTimer);
-  }
+  };
 
   var resetShotClock = function() {
     pauseShotClock();
     shotSecLeft = 23;
     $('#shot-clock').text('24');
     resumeShotClock();
-  }
+  };
 
   var resetShotClockLeft = function() {
     shotSecLeft = 23;
     $('#shot-clock').text('24');
-  }
+  };
   //---------------------------- Scoring System ----------------------------
 
   var addScore = function(team,point) {
-    if (team == "home") {
+    if (team === "home") {
       homeTeam.score = homeTeam.score + point;
       if (homeTeam.score > 9) {
         $('#home-score').text(homeTeam.score);
       } else {
         $('#home-score').text('0' + homeTeam.score);
       }
-    } else if (team == "away") {
+    } else if (team === "away") {
       awayTeam.score = awayTeam.score + point;
       if (awayTeam.score > 9) {
         $('#away-score').text(awayTeam.score);
@@ -126,11 +126,11 @@
         $('#away-score').text('0' + awayTeam.score);
       }
     }
-  }
+  };
   //---------------------------- Time Out System ----------------------------
 
   var timeOutCountDown = function() {
-    if (timeOutTimeLeft == 0) {
+    if (timeOutTimeLeft === 0) {
       console.log("stop time out");
       clearInterval(timeOutTimer);
       $('#shot-clock').text('0');
@@ -149,22 +149,22 @@
       $('#shot-clock').text(timeOutTimeLeft);
       timeOutTimeLeft = timeOutTimeLeft -1;
     }
-  }
+  };
 
   var callTimeOut = function(team,time) {
-     if (time == 60) {
-      if (team == 'home') {
+     if (time === 60) {
+      if (team === 'home') {
         homeTeam.timeout = homeTeam.timeout - 1;
         $('#home-time-out').text(homeTeam.timeout);
-      } else if (team == 'away') {
+      } else if (team === 'away') {
         awayTeam.timeout = awayTeam.timeout - 1;
         $('#away-time-out').text(awayTeam.timeout);
       }
-     } else if (time == 20) {
-      if (team == 'home') {
+     } else if (time === 20) {
+      if (team === 'home') {
         homeTeam.timeout20s = homeTeam.timeout20s - 1;
         $('#home-20-timeout').text(homeTeam.timeout20s);
-      } else if (team == 'away') {
+      } else if (team === 'away') {
         awayTeam.timeout20s = awayTeam.timeout20s - 1;
         $('#away-20-timeout').text(awayTeam.timeout20s);
       }
@@ -173,7 +173,7 @@
     pauseTimer();
     timeOutTimeLeft = time;
     timeOutTimer = setInterval(timeOutCountDown, 1000);
-  }
+  };
   //--------------------------- Team Foul System ----------------------------
 
 
@@ -182,11 +182,11 @@
   var resumeAll = function() {
     resumeTimer();
     resumeShotClock();
-  }
+  };
 
   var pauseAll = function() {
     pauseTimer();
     pauseShotClock();
-  }
+  };
   
 // })
