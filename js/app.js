@@ -1,4 +1,4 @@
-// $(document).ready(function() {
+$(document).ready(function() {
   var option = {
     time: 3,
     sessions: 4,
@@ -663,4 +663,4 @@ var playerStats = function(team,playerNum) {
       printWithoutTime(stats);
   }
 }
-// })
+})
