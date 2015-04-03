@@ -112,7 +112,7 @@
   };
 
   var resumeTimer = function() {
-    timer = setInterval(countDown, 1000);
+    timer = setInterval(countDown, 100);
   };
 
   var pauseTimer = function() {
