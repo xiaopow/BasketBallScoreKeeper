@@ -1,6 +1,6 @@
 // $(document).ready(function() {
   var option = {
-    time: 12,
+    time: 3,
     sessions: 4,
   };
 
@@ -9,12 +9,7 @@
     addPlayer: function(number,playerName) {
       this.roster[number] = {name: playerName, score: 0, foul: 0}
     },
-    roster: {
-      "1": {name: 'Player 1', score: 0, foul: 0},
-      "2": {name: 'Player 2', score: 0, foul: 0},
-      "3": {name: 'Player 3', score: 0, foul: 0},
-      "4": {name: 'Player 4', score: 0, foul: 0}
-    },
+    roster: {},
     score: 0,
     teamFoul: 0,
     timeout: 5,
@@ -44,7 +39,7 @@
   var secLeft = 0;
   var msecLeft = 0;
   var timer;
-  var shotSecLeft = 23;
+  var shotSecLeft = 24;
   var shotTimer;
   var timeOutTimeLeft = 0;
   var timeOutTimer;
@@ -60,35 +55,64 @@
       }
   };
 
+  // var countDown = function () {
+  //   if (minLeft > 0 && secLeft === 0 && msecLeft === 0) {
+  //     $('#second').text('00');
+  //     $('#msecond').text(msecLeft);
+  //     msecLeft = 9;
+  //     minLeft = minLeft - 1;
+  //     secLeft = 59;
+  //   } else if (secLeft === 59 && msecLeft === 9) {
+  //     $('#minute').text(minLeft);
+  //     $('#second').text(secLeft);
+  //     $('#msecond').text(msecLeft);
+  //     msecLeft = msecLeft - 1 ;
+  //   } else if (minLeft >= 0 && secLeft > 0 && msecLeft === 0) {
+  //     $('#msecond').text(msecLeft);
+  //     secLeft = secLeft - 1;
+  //     msecLeft = 9;
+  //   } else if (minLeft >= 0 && msecLeft > 0) {
+  //     secPresenter();
+  //     $('#msecond').text(msecLeft);
+  //     msecLeft = msecLeft - 1 ;
+  //   } else if (minLeft === 0 && secLeft === 0 && msecLeft === 0) {
+  //     $('#msecond').text(msecLeft);
+  //     console.log('stop the timer');
+  //     clearInterval(timer);
+  //   }
+  // };
+
   var countDown = function () {
-    if (minLeft > 0 && secLeft === 0 && msecLeft === 0) {
-      $('#second').text('00');
-      $('#msecond').text(msecLeft);
-      msecLeft = 9;
-      minLeft = minLeft - 1;
-      secLeft = 59;
-    } else if (secLeft === 59 && msecLeft === 9) {
-      $('#minute').text(minLeft);
-      $('#second').text(secLeft);
-      $('#msecond').text(msecLeft);
-      msecLeft = msecLeft - 1 ;
-    } else if (minLeft >= 0 && secLeft > 0 && msecLeft === 0) {
-      $('#msecond').text(msecLeft);
-      secLeft = secLeft - 1;
-      msecLeft = 9;
-    } else if (minLeft >= 0 && msecLeft > 0) {
-      secPresenter();
-      $('#msecond').text(msecLeft);
-      msecLeft = msecLeft - 1 ;
-    } else if (minLeft === 0 && secLeft === 0 && msecLeft === 0) {
-      $('#msecond').text(msecLeft);
+    if (minLeft === 0 && secLeft === 0 && msecLeft === 0) {
       console.log('stop the timer');
       clearInterval(timer);
+      pauseShotClock();
+      currentSession = currentSession + 1;
+      nextSession();
+    } else {
+      if (msecLeft == 0) {
+        msecLeft = 10;
+        msecLeft = msecLeft - 1;
+        $('#msecond').text(msecLeft);
+        if (secLeft == 0) {
+          secLeft = 60;
+          secLeft = secLeft - 1;
+          secPresenter();
+          minLeft = minLeft - 1;
+          $('#minute').text(minLeft);   
+        } else {
+          secLeft = secLeft - 1;
+          secPresenter();
+        }
+      } else {
+        msecLeft = msecLeft - 1;
+        $('#msecond').text(msecLeft);
+      }      
     }
   };
 
   var resumeTimer = function() {
-    timer = setInterval(countDown, 100);
+    timer = setInterval(countDown, 10);
   };
 
   var pauseTimer = function() {
@@ -102,10 +126,10 @@
         $('#minute').text(minLeft);
       }
     } else if (element === 'sec') {
-      if (secLeft + amount > 60) {
+      if (secLeft + amount > 59) {
         secLeft = (secLeft + amount) % 60;
       } else if (secLeft + amount < 0) {
-        secLeft = 61 + ((secLeft + amount) % 60);
+        secLeft = 60 + ((secLeft + amount) % 60);
       } else {
         secLeft = secLeft + amount;
       } secPresenter();
@@ -132,12 +156,19 @@
     };
 
   var shotClock = function () {
-    if (shotSecLeft === 0) {
-      $('#shot-clock').text('00');
-      shotSecLeft = 24;
-    } else if (shotSecLeft > 0) {
+    if (minLeft === 0 && shotSecLeft > secLeft) {
+      pauseShotClock();
+      shotSecLeft = 0;
       shotClockPresenter();
-      shotSecLeft = shotSecLeft - 1;
+    } else {
+      if (shotSecLeft === 0) {
+        // $('#shot-clock').text('00');
+        shotSecLeft = 24;
+        shotClockPresenter();
+      } else if (shotSecLeft > 0) {
+        shotSecLeft = shotSecLeft - 1;
+        shotClockPresenter();
+      }
     }
   };
 
@@ -162,7 +193,7 @@
 
   var resetShotClock = function() {
     pauseShotClock();
-    shotSecLeft = 23;
+    shotSecLeft = 24;
     $('#shot-clock').text('24');
     resumeShotClock();
   };
@@ -182,7 +213,10 @@
         $('#home-score').text('0' + homeTeam.score);
       } 
       homeTeam['roster'][playerNum]['score'] = homeTeam['roster'][playerNum]['score'] + num;
-      printWithTime('Team ' + homeTeam.name + ', player ' + homeTeam['roster'][playerNum]['name'] + ' scores a ' + num + ' pointer.');
+      if(num === 1) {
+        printWithTime('Team ' + homeTeam.name + ', player ' + playerNum + ' ' + homeTeam['roster'][playerNum]['name'] + ' scores a free throw.');
+      };
+      printWithTime('Team ' + homeTeam.name + ', player ' + playerNum + ' ' + homeTeam['roster'][playerNum]['name'] + ' scores a ' + num + ' pointer.');
     } else if (team === "away") {
       awayTeam.score = awayTeam.score + num;
       if (awayTeam.score > 9) {
@@ -191,7 +225,10 @@
         $('#away-score').text('0' + awayTeam.score);
       } 
       awayTeam['roster'][playerNum]['score'] = awayTeam['roster'][playerNum]['score'] + num;
-      printWithTime('Team ' + awayTeam.name + ', player ' + awayTeam['roster'][playerNum]['name'] + ' scores a ' + num + ' pointer.');
+      if(num === 1) {
+        printWithTime('Team ' + awayTeam.name + ', player ' + playerNum + ' ' + awayTeam['roster'][playerNum]['name'] + ' scores a free throw.');
+      };
+      printWithTime('Team ' + awayTeam.name + ', player ' + playerNum + ' ' + awayTeam['roster'][playerNum]['name'] + ' scores a ' + num + ' pointer.');
     }
   };
   //---------------------------- Time Out System ----------------------------
@@ -202,15 +239,16 @@
       clearInterval(timeOutTimer);
       $('#shot-clock').text('0');
       setTimeout(function(){
-        if (shotSecLeft < 24) {
-          if (shotSecLeft > 8) {
-            $('#shot-clock').text(shotSecLeft+1);
-          } else {
-            $('#shot-clock').text('0' + (shotSecLeft+1));
-          } 
-        } else {
-            $('#shot-clock').text(shotSecLeft);
-        }        
+        shotClockPresenter();
+        // if (shotSecLeft < 24) {
+        //   if (shotSecLeft > 9) {
+        //     $('#shot-clock').text(shotSecLeft);
+        //   } else {
+        //     $('#shot-clock').text('0' + (shotSecLeft));
+        //   } 
+        // } else {
+        //     $('#shot-clock').text(shotSecLeft);
+        // }        
       },1000);
     } else {
       $('#shot-clock').text(timeOutTimeLeft);
@@ -252,22 +290,23 @@
       homeTeam.teamFoul = homeTeam.teamFoul + 1;
       $('#home-team-foul').text(homeTeam.teamFoul);
       homeTeam['roster'][playerNum]['foul'] = homeTeam['roster'][playerNum]['foul'] + 1;
-      printWithTime('Team ' + homeTeam.name + ', player ' + homeTeam['roster'][playerNum]['name'] + ' commits a personal foul. '
-        + homeTeam['roster'][playerNum]['name'] + ' has commited ' + homeTeam['roster'][playerNum]['foul'] + ' personal fouls.');
+      printWithTime('Team ' + homeTeam.name + ', player ' + playerNum + ' ' + homeTeam['roster'][playerNum]['name'] + ' commits a personal foul. Total '
+      + homeTeam['roster'][playerNum]['foul'] + ' personal fouls.');
     } else if (team === "away") {
       awayTeam.teamFoul = awayTeam.teamFoul + 1;
       $('#away-team-foul').text(awayTeam.teamFoul);
       awayTeam['roster'][playerNum]['foul'] = awayTeam['roster'][playerNum]['foul'] + 1;
-      printWithTime('Team ' + awayTeam.name + ', player ' + awayTeam['roster'][playerNum]['name'] + ' commits a personal foul. '
-        + awayTeam['roster'][playerNum]['name'] + ' has committed ' + awayTeam['roster'][playerNum]['foul'] + ' personal fouls.');
+      printWithTime('Team ' + awayTeam.name + ', player ' + playerNum + ' ' + awayTeam['roster'][playerNum]['name'] + ' commits a personal foul. Total '
+      + awayTeam['roster'][playerNum]['foul'] + ' personal fouls.');
     }
   };
 
   //------------------------- Log Printing System ---------------------------
 
-  var print = function(string){
+  var printWithoutTime = function(string){
     $('.match-log').append('<p>'+string+'</p>')
   };
+
   var printWithTime = function(string){
     var sec;
     if (secLeft > 9) {
@@ -277,8 +316,9 @@
       }
     currentTime = '( Q' + currentSession + ' -- ' + minLeft + ':' + sec + ' ) ';
     $('.match-log').append('<p>'+currentTime+string+'</p>');
-
+    $('#now').text(currentTime+string);
   };
+
   $(document).on('click', '#enter', function(){
     var customLog = $('#user-input').val();
     printWithTime(customLog);
@@ -482,17 +522,137 @@
 //--------------------------- Set Up Game ------------------------------
 
   $(document).on('click', '#add-home-player', function() {
-    $(this).parent().prepend('<div class="set-home-player"> \
-                <input type="text" class="col-xs-3 home-player-no" placeholder="No"> \
+    $(this).siblings('.set-players').append('<div class="set-home-player"> \
+                <input type="text" class="col-xs-3 home-player-no" placeholder="No."> \
                 <input type="text" class="col-xs-9 home-player-name" placeholder="Name"> \
               </div>')
   });
 
   $(document).on('click', '#add-away-player', function() {
-    $(this).parent().prepend('<div class="set-away-player"> \
-                <input type="text" class="col-xs-3 away-player-no" placeholder="No"> \
+    $(this).siblings('.set-players').append('<div class="set-away-player"> \
+                <input type="text" class="col-xs-3 away-player-no" placeholder="No."> \
                 <input type="text" class="col-xs-9 away-player-name" placeholder="Name"> \
               </div>')
   });
 
+  var setUpGame = function(){
+    option.sessions = Number($('#set-sessions').val());
+    option.time = Number($('#set-time').val());
+    minLeft = option.time;
+    $('#minute').text(minLeft);
+    homeTeam.name = $('#set-home-name').val();
+    awayTeam.name = $('#set-away-name').val();
+    $('#home-name').text(homeTeam.name);
+    $('#away-name').text(awayTeam.name);
+    shotClockPresenter();
+  };
+
+  var homeArrayNum = [];
+  var awayArrayNum = [];
+
+  var setUpHomePlayers = function(){
+    homeArrayNum = $('.home-player-no');
+    var arrayName = $('.home-player-name');
+    var arrayRoster = [];
+    for (i=0; i<homeArrayNum.length; i++) {
+      arrayRoster.push( [ $(homeArrayNum[i]).val(), $(arrayName[i]).val() ] );
+    };
+    for (i=0; i<arrayRoster.length; i++) {
+      homeTeam.addPlayer( arrayRoster[i][0], arrayRoster[i][1] );
+      $('.home-roster-score').append('<button class="btn btn-default col-xs-2 home-player-point">' + arrayRoster[i][0] + '</button>');
+      $('.home-roster-foul').append('<button class="btn btn-default col-xs-2 home-player-foul">' + arrayRoster[i][0] + '</button>');
+    }
+  };
+
+  var setUpAwayPlayers = function(){
+    awayArrayNum = $('.away-player-no');
+    var arrayName = $('.away-player-name');
+    var arrayRoster = [];
+    for (i=0; i<awayArrayNum.length; i++) {
+      arrayRoster.push( [ $(awayArrayNum[i]).val(), $(arrayName[i]).val() ] );
+    };
+    for (i=0; i<arrayRoster.length; i++) {
+      awayTeam.addPlayer( arrayRoster[i][0], arrayRoster[i][1] );
+      $('.away-roster-score').append('<button class="btn btn-default col-xs-2 away-player-point">' + arrayRoster[i][0] + '</button>');
+      $('.away-roster-foul').append('<button class="btn btn-default col-xs-2 away-player-foul">' + arrayRoster[i][0] + '</button>');
+    }
+  };
+
+  $(document).on('click', '#setup-game', function() {
+    setUpGame();
+    setUpHomePlayers();
+    setUpAwayPlayers();
+    $('.set-up').toggleClass('hide');
+    $('.display').toggleClass('hide');
+    $('.con-btns').toggleClass('hide');
+    $('.input-box').toggleClass('hide');
+  });
+
+//--------------------------- End of Sessions ------------------------------
+
+var nextSession = function() {
+  if (currentSession > option.sessions && homeTeam.score != awayTeam.score) {
+    printWithoutTime('end game');
+    if (homeTeam.score>awayTeam.score) {
+      printWithoutTime(homeTeam.name + ' wins!');
+    } else {
+      printWithoutTime(awayTeam.name + ' wins!');
+    }
+    printWithoutTime('Final Score: ' + homeTeam.name + ' - ' + homeTeam.score
+      + ' | ' + awayTeam.score + ' - ' + awayTeam.name);
+    for (i=0; i<homeArrayNum.length; i++) {
+      playerStats('home',$(homeArrayNum[i]).val());
+    }
+    for (i=0; i<awayArrayNum.length; i++) {
+      playerStats('away',$(awayArrayNum[i]).val());
+    }
+  } else if (option.sessions === 2) {
+    $('#current-session').text(currentSession);
+    minLeft = option.time;
+    $('#minute').text(minLeft);
+    resetShotClockLeft();
+    homeTeam.timeout20s = 1
+    $('#home-20-timeout').text(homeTeam.timeout20s);
+    awayTeam.timeout20s = 1
+    $('#away-20-timeout').text(awayTeam.timeout20s);
+    $('#start').toggleClass('hide');
+    $('#pause').toggleClass('hide');
+    $('#reset-shot-time').toggleClass('hide');
+    $('#reset-shot').toggleClass('hide');
+  } else if ((option.sessions%currentSession) === 1) {
+    $('#current-session').text(currentSession);
+    minLeft = option.time;
+    $('#minute').text(minLeft);
+    resetShotClockLeft();
+    homeTeam.timeout20s = 1
+    $('#home-20-timeout').text(homeTeam.timeout20s);
+    awayTeam.timeout20s = 1
+    $('#away-20-timeout').text(awayTeam.timeout20s);
+    $('#start').toggleClass('hide');
+    $('#pause').toggleClass('hide');
+    $('#reset-shot-time').toggleClass('hide');
+    $('#reset-shot').toggleClass('hide');
+  } else if (currentSession <= option.sessions) {
+    $('#current-session').text(currentSession);
+    minLeft = option.time;
+    $('#minute').text(minLeft);
+    resetShotClockLeft();
+    $('#start').toggleClass('hide');
+    $('#pause').toggleClass('hide');
+    $('#reset-shot-time').toggleClass('hide');
+    $('#reset-shot').toggleClass('hide');
+  }
+}
+
+var playerStats = function(team,playerNum) {
+  if (team === 'home') {
+    var stats = homeTeam.roster[playerNum].name + ' (Points: ' + 
+      homeTeam.roster[playerNum].score + ' Foul: ' + homeTeam.roster[playerNum].foul+')';
+      printWithoutTime(stats);
+  } else if (team === 'away') {
+    var stats = awayTeam.roster[playerNum].name + ' (Points: ' + 
+      awayTeam.roster[playerNum].score + ' Foul: ' + awayTeam.roster[playerNum].foul+')';
+      printWithoutTime(stats);
+  }
+}
 // })

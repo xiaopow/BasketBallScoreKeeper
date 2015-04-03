@@ -213,4 +213,6 @@
 .match-log p {
   margin-bottom: 2px;
 }
-
+#now {
+  font-size: 20px;
+}
